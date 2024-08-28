@@ -2,6 +2,7 @@ package co.edu.uptc.models;
 
 public class SimpleList {
     private Node header;
+    private Node lastNode;
 
     // VERSION 1 
     // public void add(String info){
@@ -32,6 +33,19 @@ public class SimpleList {
             last = last.getNext();
         }
         return last;
+    }
+
+    public void addEnd(String info){
+        Node newNode = new Node();
+        newNode.setInfo(info); 
+        newNode.setNext(null);
+        if(isEmpty()){
+            header = newNode;
+            lastNode = header;
+        }else{
+            lastNode.setNext(newNode);
+           lastNode = newNode;
+        }
     }
 
 
