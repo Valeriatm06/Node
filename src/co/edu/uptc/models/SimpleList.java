@@ -75,17 +75,16 @@ public class SimpleList <T> implements List<T>{
     //   }
     //   return aux.getInfo();
     // }
-
+    
+    @Override
+    public Iterator<T> iterator() {
+       return new SimpleListIterator<>(header);
+    }
 
     @Override   
     public boolean contains(Object o) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'contains'");
-    }
-    @Override
-    public Iterator<T> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
     @Override
     public Object[] toArray() {

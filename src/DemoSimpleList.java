@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.uptc.models.SimpleList;
@@ -16,6 +15,9 @@ public class DemoSimpleList {
         list = new SimpleList<Integer>();
         for (int i = 0; i < randomNumbers.size(); i++) {
             list.add(randomNumbers.get(i));
+            //ITERATOR
+        // for (int integer : randomNumbers) {  
+        //     list.add(integer);
         }
     }
 
