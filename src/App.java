@@ -1,16 +1,22 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import co.edu.uptc.test.RealCal;
+import co.edu.uptc.test.Test;
+
 public class App {
      public static void main(String[] args) {
           
           List<Integer> randomNumber = generateRandomNumer(10000, 1, 10000);
 
-          DemoArrayList ar = new DemoArrayList();
-          ar.testArrayList(randomNumber);
+          Test test = new Test();
 
-          DemoSimpleList sl = new DemoSimpleList();
-          sl.testSimpleList(randomNumber);;
+          test.testArrayList(randomNumber);
+          RealCal<Integer> ra = new RealCal<>();
+          ra.run(test.getList(), "Array List");
+
+          test.testSimpleList(randomNumber);
+          ra.run(test.getList(), "Simple List");
 
      }
 
