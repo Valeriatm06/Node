@@ -55,26 +55,25 @@ public class SimpleList <T> implements List<T>{
     
     @Override
     public T get(int index) {
-        if(lastGet == null){
-            lastGet = header;
-        }else{
-            if(lastGet.getNext() != null)
-            lastGet = lastGet.getNext();
-            else return null;
-        }
-        return lastGet.getInfo();
+        Node<T> current = header;
+    for (int i = 0; i < index; i++) {
+        current = current.getNext();
     }
 
-     // @Override
-    // public T get(int index) {
-    //   Node<T> aux = header;
-    //   int conta=0;
-    //   while (aux.getNext()!=null && conta <=index){      
-    //      aux = aux.getNext();
-    //      conta = conta +1;
-    //   }
-    //   return aux.getInfo();
-    // }
+    return current.getInfo();
+    }
+
+    @Override
+    public T set(int index, T element) {
+        Node<T> current = header;
+    for (int i = 0; i < index; i++) {
+        current = current.getNext();
+    }
+
+    T oldInfo = current.getInfo();
+    current.setInfo(element);
+    return oldInfo;
+    }
     
     @Override
     public Iterator<T> iterator() {
@@ -131,12 +130,7 @@ public class SimpleList <T> implements List<T>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'clear'");
     }
-
-    @Override
-    public T set(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'set'");
-    }
+    
     @Override
     public void add(int index, T element) {
         // TODO Auto-generated method stub
