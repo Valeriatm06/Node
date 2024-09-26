@@ -10,7 +10,6 @@ public class SimpleList <T> implements List<T>{
     private Node<T> header;
     private Node<T> lastNode;
     public int size = 0;
-    private Node<T> lastGet = null;
 
     public SimpleList(){
         header = null;
@@ -82,24 +81,124 @@ public class SimpleList <T> implements List<T>{
 
     @Override   
     public boolean contains(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+        Node<T> aux = header;
+        boolean contains = false;
+        while (aux != null && contains == false) {
+            if(aux.getInfo().equals(o)){
+                contains = true;
+            }
+            aux = aux.getNext();
+        }
+        return contains;
     }
+
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Object [] array = new Object[size];
+        Node<T> aux = header;
+        for (int i = 0; i < size; i++) {
+            array[i] = aux.getInfo();
+            aux = aux.getNext();
+        }
+        return array;
     }
+
+    @Override
+    public boolean remove(Object o) {
+        Node<T> aux = header;
+        int index = indexOf(o);
+        boolean isRemoved = false;
+
+        for (int i = 0; i < index-1; i++) {
+            aux = aux.getNext();
+        }
+
+        Node<T> remove = aux.getNext();
+        if(remove != null){
+            aux.setNext(remove.getNext());
+            isRemoved =true;
+            size -= 1;
+        }
+        return isRemoved;
+    }
+
+    @Override
+    public void clear() {
+        header = null;
+        lastNode = null;
+        size = 0;
+    }
+
+    @Override
+    public void add(int index, T element) {
+        Node<T> newNode = new Node<>();
+        newNode.setInfo(element);
+
+        if (index == 0) {
+            newNode.setNext(header); 
+            header = newNode; 
+        } else {
+            Node<T> aux = header; 
+            for (int i = 0; i < index - 1; i++) {
+                aux = aux.getNext(); 
+            }
+            newNode.setNext(aux.getNext()); 
+            aux.setNext(newNode);
+        }
+
+        size++;
+    }
+
+    @Override
+    public T remove(int index) {
+        Node<T> aux = header;
+        for (int i = 0; i < index-1; i++) {
+            aux = aux.getNext();
+        }
+        Node<T> remove = aux.getNext();
+        if(remove != null){
+            aux.setNext(remove.getNext());
+            size -= 1;
+        }
+        T info = aux.getInfo();
+        return info;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        Node<T> aux = header;
+        int index = -1;
+        int i = 0;
+        while (aux != null && index == -1) {
+            if (aux.getInfo().equals(o)) {
+                index = i; 
+            } else {
+                aux = aux.getNext(); 
+                i++; 
+            }
+        }
+        return index;  
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        Node<T> aux = header;
+        int index = -1; 
+        for (int i = 0; i < size; i++) {
+            if (aux.getInfo().equals(o)) {
+                index = i; 
+            }
+            aux = aux.getNext(); 
+        }
+        return index;
+    }
+
     @Override
     public <T> T[] toArray(T[] a) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toArray'");
     }
-    @Override
-    public boolean remove(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
-    }
+
     @Override
     public boolean containsAll(Collection<?> c) {
         // TODO Auto-generated method stub
@@ -125,32 +224,7 @@ public class SimpleList <T> implements List<T>{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
     }
-    @Override
-    public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
-    }
     
-    @Override
-    public void add(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
-    }
-    @Override
-    public T remove(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
-    }
-    @Override
-    public int indexOf(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'indexOf'");
-    }
-    @Override
-    public int lastIndexOf(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'lastIndexOf'");
-    }
     @Override
     public ListIterator<T> listIterator() {
         // TODO Auto-generated method stub
